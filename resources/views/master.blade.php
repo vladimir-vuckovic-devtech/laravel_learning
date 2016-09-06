@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class="container cust-cont">
-        <h1>@yield("content")</h1>
+        @yield("content")
     </div>
 </body>
 </html>
