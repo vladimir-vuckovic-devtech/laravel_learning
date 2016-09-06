@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="container cust-cont">
+        <div class="container"> <h2>{{ $title }}</h2> </div>
         @yield("content")
     </div>
 </body>

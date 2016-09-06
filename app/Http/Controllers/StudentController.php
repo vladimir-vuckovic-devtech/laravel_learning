@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use App\Student;
 
 class StudentController extends Controller
 {
@@ -15,7 +15,11 @@ class StudentController extends Controller
      */
     public function index()
     {
-        echo "from index";
+        $students = Student::all();
+        $data["students"] = $students;
+        $data["title"] = "Students";
+        return \View::make("students_view", $data);
+        //echo "from index";
     }
 
     /**
