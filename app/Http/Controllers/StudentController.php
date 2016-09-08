@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Student;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class StudentController extends Controller
 {
@@ -15,11 +19,17 @@ class StudentController extends Controller
      */
     public function index()
     {
+        if(!Schema::hasTable("students")) {
+            throw new \Exception("Trazena tabela ne postoji u bazi.");
+        }
+
         $students = Student::all();
+        if ($students->isEmpty()) {
+            throw new \Exception("Tabela je prazna.");
+        }
         $data["students"] = $students;
         $data["title"] = "Students";
-        return \View::make("students_view", $data);
-        //echo "from index";
+        return View::make("students_view", $data);
     }
 
     /**

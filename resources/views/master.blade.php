@@ -9,7 +9,9 @@
 </head>
 <body>
     <div class="container cust-cont">
-        <div class="container"> <h2>{{ $title }}</h2> </div>
+        @if(isset($title))
+            <h2>{{ $title }}</h2>
+        @endif
         @yield("content")
     </div>
 </body>
