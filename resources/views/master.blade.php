@@ -9,6 +9,9 @@
 </head>
 <body>
     <div class="container cust-cont">
+        @if(isset($title))
+            <h2>{{ $title }}</h2>
+        @endif
         @yield("content")
     </div>
 </body>
