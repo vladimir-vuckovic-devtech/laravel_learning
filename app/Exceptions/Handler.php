@@ -47,8 +47,8 @@ class Handler extends ExceptionHandler
         if($exception instanceof \PDOException){
             return response()->view('no_database',['error_message' => "Konekcija ka bazi nije uspesno uspostavljena"]);
         }
-        return response()->view('general_error',['error' => $exception]);
-        //return parent::render($request, $exception);
+        //return response()->view('general_error',['error' => $exception]);
+        return parent::render($request, $exception);
     }
 
     /**

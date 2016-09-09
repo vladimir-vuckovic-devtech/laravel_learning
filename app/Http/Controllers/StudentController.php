@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Student;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class StudentController extends Controller
 {
@@ -39,7 +37,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        echo "from create";
+        return view("student_create");
     }
 
     /**
@@ -50,6 +48,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->password);
         echo "from store";
     }
 
