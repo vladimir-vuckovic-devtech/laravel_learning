@@ -20,13 +20,10 @@ class StudentController extends Controller
     public function index()
     {
         if(!Schema::hasTable("students")) {
-            throw new \Exception("Trazena tabela ne postoji u bazi.");
+            throw new \Exception("Table does not exists in the database.");
         }
 
         $students = Student::all();
-        if ($students->isEmpty()) {
-            throw new \Exception("Tabela je prazna.");
-        }
         $data["students"] = $students;
         $data["title"] = "Students";
         return View::make("students_view", $data);
