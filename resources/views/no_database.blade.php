@@ -2,6 +2,6 @@
 
 @section("content")
     <div class="alert alert-danger fade in">
-        <strong>Danger!</strong> Konekcija ka bazi nije uspesno uspostavljena.
+        <strong>Danger!</strong> {{ $error_message }}
     </div>
 @stop
