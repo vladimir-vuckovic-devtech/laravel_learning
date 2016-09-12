@@ -34,7 +34,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view("student_create");
+        echo "from create";
     }
 
     /**
@@ -45,7 +45,6 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->password);
         echo "from store";
     }
 

@@ -16,9 +16,18 @@
                         <tr>
                             <td><a href="{{ action("StudentController@show", [$student->id]) }} {{--{{ url("/student", $student->id) }}--}}">{{ $student->username }}</a></td>
                             <td>{{ $student->password }}</td>
-                            <td><span><a href="{{ /*action('StudentController@edit')*/ }}" onclick="alert()">Edit</a>
-								|
-								<a href="{{ action('StudentController@edit', [$student->id]) }}" onclick="return false">Delete</a></span></td>
+                            <td style="width:150px;">
+                                <div class="btn-group btn-group-justified" role="group">
+                                    <div class="btn-group" role="group">
+                                        <a href="{{ action('StudentController@edit', ["student" => $student->id]) }}" role="button" class="btn btn-default">Edit</a>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        {{ Form::open(array('action' => array('StudentController@destroy', $student->id), 'method' => 'delete')) }}
+                                        <button type="submit" onclick="alert(event)" class="btn btn-danger btn-mini">Delete</button>
+                                        {{ Form::close() }}
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
             </tbody>
@@ -26,13 +35,15 @@
         <div class="container">
             <div class="row">
                 <a href="{{ action('StudentController@create') }}" class="btn btn-default">Create student</a>
-                <a href="{{ action('StudentController@edit') }}" class="btn btn-default">Edit student</a>
 
             </div>
         </div>
         <script>
-            function alert(){
-                confirm("Are you sure you want to delete selected user?")
+            function alert(e){
+                var conf = confirm("Are you sure you want to delete selected user?");
+                if(!conf){
+                    e.preventDefault()
+                }
             }
         </script>
     @else
