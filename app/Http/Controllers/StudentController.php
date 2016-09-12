@@ -34,7 +34,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        echo "from create";
+        return view("student_create");
     }
 
     /**
@@ -45,7 +45,14 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        echo "from store";
+        $this->validate($request, [
+            "username" => "required|unique:students",
+            "password" => "required"
+        ]);
+        Student::create($request->toArray());
+        return redirect("/student");
+        //dd($request->toArray());
+        //echo "from store";
     }
 
     /**
