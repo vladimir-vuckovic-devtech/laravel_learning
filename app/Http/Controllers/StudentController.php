@@ -34,7 +34,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view("student_create");
+        $data['title'] = "Create student";
+        return view("student_create", $data);
     }
 
     /**
