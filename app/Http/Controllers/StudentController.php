@@ -46,10 +46,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            "username" => "required|unique:students",
-            "password" => "required"
-        ]);
+        $this->validateFields($request);
         Student::create($request->toArray());
         return redirect("/student");
         //dd($request->toArray());
@@ -75,7 +72,11 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        echo "from edit";
+        $student = Student::findOrFail($id);
+        $data['title'] = "Student edit";
+        $data['student'] = $student;
+        return view("student_edit", $data);
+        //echo "from edit";
     }
 
     /**
@@ -87,7 +88,13 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo "from update";
+        $this->validateFields($request, $id);
+        $student = Student::findOrFail($id);
+        $student->username = $request->username;
+        $student->password = $request->password;
+        $student->save();
+        return redirect("/student");
+        //$student->update($request->all());
     }
 
     /**
@@ -99,5 +106,13 @@ class StudentController extends Controller
     public function destroy($id)
     {
         echo "from destroy";
+    }
+
+    public function validateFields($request, $id = null){
+        echo $id;
+        $this->validate($request, [
+            "username" => "required|unique:students,username," . $id,
+            "password" => "required"
+        ]);
     }
 }
