@@ -105,7 +105,10 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        echo "from destroy";
+        $student = Student::find($id);
+        $student->delete();
+        return redirect("/student");
+        //echo "from destroy";
     }
 
     public function validateFields($request, $id = null){

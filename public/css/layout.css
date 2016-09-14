@@ -14,3 +14,7 @@ html, body {
 .margin-top{
     margin-top:20px;
 }
+
+.inline-block{
+    display: inline-block;
+}
