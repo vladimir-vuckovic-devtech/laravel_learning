@@ -48,8 +48,7 @@ class StudentController extends Controller
     {
         $this->validateFields($request);
         Student::create($request->toArray());
-        return redirect("/student");
-        //dd($request->toArray());
+        return redirect()->route("student.index");
         //echo "from store";
     }
 
