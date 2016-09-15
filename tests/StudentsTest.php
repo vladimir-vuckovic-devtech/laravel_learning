@@ -1,22 +1,16 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\Student;
-
 class StudentsTest extends TestCase
 {
+
+    private $mock;
+
     /**
      * A basic test example.
-     *
-     * @return void
      */
-
-    public function __construct()
-    {
-        // We have no interest in testing Eloquent
-        $this->mock = \Mockery::mock('Eloquent', 'App\Student');
+    public function setUp() {
+        parent::setUp();
+        $this->mock = Mockery::mock('Eloquent', '\App\Student');
     }
 
     public function tearDown()
@@ -29,9 +23,6 @@ class StudentsTest extends TestCase
         $response = $this->call("GET","/student");
         $this->assertViewHas("students");
         $this->assertEquals(200, $response->getStatusCode());
-        //dd($response->getStatusCode());
-        //dd(get_class_methods($response));
-        //$this->assertTrue(true);
     }
 
     public function testStoreMethod(){
@@ -40,12 +31,9 @@ class StudentsTest extends TestCase
             ->shouldReceive('create')
             ->once();
 
-        $this->app->instance('App\Student', $this->mock);
-        $response = $this->call("POST","/student");
-        //$this->assertRedirectedToRoute("student.index");
-        //$this->assertSessionHasErrors(['title']);
-       //$this->assertRedirectedToAction("StudentController@index");
-        $this->assertEquals(302, $response->getStatusCode());
+        $this->app->instance('\App\Student', $this->mock);
+        $this->call("POST","/student", ['username' => random_int(1,5000), 'password' => '123']);
+        $this->assertRedirectedToRoute("student.index");
     }
 
     /*public function testCreateMethod(){
