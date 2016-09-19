@@ -114,6 +114,7 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
+        //dd($id);
         $student = $this->student->find($id);
         $student->delete();
         return redirect("/student");
