@@ -62,9 +62,11 @@ class StudentsTest extends TestCase
             ->shouldReceive("findOrFail")
             ->with(5)
             ->once()
-            ->andReturn($this->mock->shouldIgnoreMissing());
+            ->andReturn($this->mock);
 
-        //dd(get_class_methods($this->mock));
+        $this->mock
+            ->shouldReceive('setAttribute')
+            ->twice();
 
         $this->mock
             ->shouldReceive("save")
