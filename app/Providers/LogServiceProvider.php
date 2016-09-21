@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use App\DatabaseLogger\UniLogger;
 use Monolog\Logger as MonologLogger;
 use Monolog\Handler\StreamHandler;
+use Monolog\Formatter\LineFormatter;
 
 class LogServiceProvider extends ServiceProvider
 {
@@ -29,9 +30,10 @@ class LogServiceProvider extends ServiceProvider
         //dd(app_path());
         $this->app->bind("App\\DatabaseLogger\\UniLogger", function(){
             $mono = new MonologLogger("uniloger");
-            $mono->pushHandler(new StreamHandler(storage_path().'/logs/laravel.log', MonologLogger::WARNING));
-            //$mono->warning('Foo');
-            //$mono->error('Bar');
+            $handler = new StreamHandler(storage_path().'/logs/laravel.log', MonologLogger::DEBUG);
+            $formatter = new LineFormatter(null, null, false, true);
+            $handler->setFormatter($formatter);
+            $mono->pushHandler($handler);;
             return new UniLogger($mono, $this->app['events']);
         });
         //
