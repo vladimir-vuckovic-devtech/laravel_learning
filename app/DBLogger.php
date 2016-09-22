@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class DBLogger extends Model
 {
-    protected $fillable = ['log_info'];
+    protected $fillable = ['loggs', 'type'];
     protected $table = 'logs';
 }

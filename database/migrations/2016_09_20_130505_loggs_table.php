@@ -16,6 +16,7 @@ class LoggsTable extends Migration
         Schema::create('logs', function (Blueprint $table) {
             $table->increments('id');
             $table->string("loggs");
+            $table->string("type");
             $table->timestamps();
         });
     }
