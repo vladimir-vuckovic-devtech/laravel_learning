@@ -11,8 +11,12 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('master');
 });
 
-Route::resource('student','StudentController');
+Route::resource('student','StudentController');*/
+
+
+Route::get('/', 'QueueController@index');
+Route::get('/send', 'QueueController@send');
